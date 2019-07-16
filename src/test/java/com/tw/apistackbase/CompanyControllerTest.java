@@ -21,6 +21,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -69,5 +70,11 @@ public class CompanyControllerTest {
         Mockito.when(companyService.getCompaniesByPage(anyInt(),anyInt())).thenReturn(companies);
         ResultActions result = mvc.perform(get("/companies?page=1&pageSize=1"));
         result.andExpect(status().isOk()).andExpect( jsonPath("[0].companyName").value("OOCL"));
+    }
+
+    @Test
+    void should_return_ok_when_addCompany_give_company() throws Exception{
+        ResultActions result = mvc.perform(post("/companies").contentType("application/json;charset=UTF-8").content("{}"));
+        result.andExpect(status().isOk());
     }
 }

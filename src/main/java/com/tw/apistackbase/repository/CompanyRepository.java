@@ -36,4 +36,8 @@ public class CompanyRepository {
         int end = (page - 1) * pageSize + pageSize;
         return new ArrayList<>(companies.values()).subList(start, end);
     }
+
+    public void addCompany(Company company) {
+        this.companies.put(company.getCompanyName(),company);
+    }
 }

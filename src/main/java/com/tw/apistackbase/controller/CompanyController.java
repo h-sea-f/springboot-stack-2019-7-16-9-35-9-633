@@ -4,10 +4,7 @@ import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,10 @@ public class CompanyController {
     @GetMapping(params = {"page", "pageSize"}, value = "/companies")
     public List<Company> getCompaniesByPage(@RequestParam int page, @RequestParam int pageSize) {
         return companyService.getCompaniesByPage(page,pageSize);
+    }
+
+    @PostMapping("/companies")
+    public void addCompany(Company company){
+        companyService.addCompany(company);
     }
 }
