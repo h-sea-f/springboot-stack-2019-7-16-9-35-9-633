@@ -49,9 +49,19 @@ public class EmployeesControllerTest {
 
     @Test
     void should_return_employee_when_getByName_given_name() throws Exception {
-        Employee employee=new Employee(1,"Sean",22,"male",5000);
+        Employee employee = new Employee(1, "Sean", 22, "male", 5000);
         Mockito.when(employeeService.getByName(anyString())).thenReturn(employee);
-        ResultActions result = mvc.perform(get("/employees/{name}",employee.getName()));
+        ResultActions result = mvc.perform(get("/employees/{name}", employee.getName()));
         result.andExpect(status().isOk()).andExpect(jsonPath("$.name").value("Sean"));
+    }
+
+    @Test
+    void should_return_employees_when_getEmployeesPage_give_page_pageSize() throws Exception {
+        Employee employee = new Employee(1, "Sean", 22, "male", 5000);
+        List<Employee> employees = new ArrayList<>();
+        employees.add(employee);
+        Mockito.when(employeeService.getEmployeesByPage(anyInt(), anyInt())).thenReturn((employees));
+        ResultActions result = mvc.perform(get("/employees?page=1&pageSize=1"));
+        result.andExpect(status().isOk()).andExpect(jsonPath("[0].name").value("Sean"));
     }
 }

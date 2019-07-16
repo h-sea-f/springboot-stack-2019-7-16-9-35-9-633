@@ -19,4 +19,24 @@ public class EmployeeService {
     public Employee getByName(String name) {
         return repository.getByName(name);
     }
+
+    public List<Employee> getEmployeesByPage(int page, int pageSize) {
+        return repository.getEmployeesByPage(page,pageSize);
+    }
+
+    public List<Employee> getByGender(String gender) {
+        return repository.getByGender(gender);
+    }
+
+    public void addEmployee(Employee employee) {
+        repository.addEmployee(employee);
+    }
+
+    public void updateEmployee(int id, Employee employee) {
+        repository.updateEmployee(id,employee);
+    }
+
+    public void deleteEmployee(int id) {
+        repository.deleteEmployee(id);
+    }
 }
