@@ -1,10 +1,7 @@
 package com.tw.apistackbase;
 
-import com.tw.apistackbase.controller.CompanyController;
 import com.tw.apistackbase.controller.EmployeesController;
-import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
-import com.tw.apistackbase.service.CompanyService;
 import com.tw.apistackbase.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,8 +19,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
