@@ -46,4 +46,12 @@ public class EmployeesControllerTest {
         ResultActions result = mvc.perform(get("/employees"));
         result.andExpect(status().isOk()).andExpect(jsonPath("[0].name").value("Sean"));
     }
+
+    @Test
+    void should_return_employee_when_getByName_given_name() throws Exception {
+        Employee employee=new Employee(1,"Sean",22,"male",5000);
+        Mockito.when(employeeService.getByName(anyString())).thenReturn(employee);
+        ResultActions result = mvc.perform(get("/employees/{name}",employee.getName()));
+        result.andExpect(status().isOk()).andExpect(jsonPath("$.name").value("Sean"));
+    }
 }

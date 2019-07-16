@@ -18,4 +18,8 @@ public class EmployeeRepository {
     public List<Employee> getAllEmployee() {
         return new ArrayList<>(employees.values());
     }
+
+    public Employee getByName(String name) {
+        return employees.get(name);
+    }
 }

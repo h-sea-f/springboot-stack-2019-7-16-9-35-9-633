@@ -15,4 +15,8 @@ public class EmployeeService {
     public List<Employee> getAllEmployee() {
         return repository.getAllEmployee();
     }
+
+    public Employee getByName(String name) {
+        return repository.getByName(name);
+    }
 }
