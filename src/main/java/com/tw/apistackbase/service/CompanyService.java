@@ -32,4 +32,12 @@ public class CompanyService {
     public void addCompany(Company company) {
         repository.addCompany(company);
     }
+
+    public void updateCompany(String companyName, Company company) {
+        repository.updateCompany(companyName,company);
+    }
+
+    public void deleteCompanyByName(String companyName) {
+        repository.deleteCompanyByName(companyName);
+    }
 }

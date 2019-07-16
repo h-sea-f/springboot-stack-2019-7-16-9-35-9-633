@@ -38,6 +38,19 @@ public class CompanyRepository {
     }
 
     public void addCompany(Company company) {
-        this.companies.put(company.getCompanyName(),company);
+        this.companies.put(company.getCompanyName(), company);
+    }
+
+    public void updateCompany(String companyName, Company company) {
+        if (companies.containsKey(companyName)) {
+            this.companies.remove(companyName);
+            this.companies.put(companyName, company);
+        }
+    }
+
+    public void deleteCompanyByName(String companyName) {
+        if (companies.containsKey(companyName)) {
+            companies.remove(companyName);
+        }
     }
 }

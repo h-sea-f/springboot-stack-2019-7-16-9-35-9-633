@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -75,6 +76,12 @@ public class CompanyControllerTest {
     @Test
     void should_return_ok_when_addCompany_give_company() throws Exception{
         ResultActions result = mvc.perform(post("/companies").contentType("application/json;charset=UTF-8").content("{}"));
+        result.andExpect(status().isOk());
+    }
+
+    @Test
+    void should_return_ok_when_updateCompany_give_companyName_company() throws Exception{
+        ResultActions result = mvc.perform(put("/companies/{companyName}","OOCL").contentType("application/json;charset=UTF-8").content("{}"));
         result.andExpect(status().isOk());
     }
 }
