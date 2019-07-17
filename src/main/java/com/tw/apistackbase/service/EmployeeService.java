@@ -16,8 +16,8 @@ public class EmployeeService {
         return repository.getAllEmployee();
     }
 
-    public Employee getByName(String name) {
-        return repository.getByName(name);
+    public Employee getById(int id) {
+        return repository.getByid(id);
     }
 
     public List<Employee> getEmployeesByPage(int page, int pageSize) {

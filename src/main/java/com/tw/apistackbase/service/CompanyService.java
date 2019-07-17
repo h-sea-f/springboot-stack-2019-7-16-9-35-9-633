@@ -25,7 +25,7 @@ public class CompanyService {
         return repository.findEmployeesByName(companyName);
     }
 
-    public List<Company> getCompaniesByPage(int page, int pageSize) {
+    public List<Company> getCompaniesByPage(Integer page, Integer pageSize) {
        return repository.getCompaniesByPage(page,pageSize);
     }
 

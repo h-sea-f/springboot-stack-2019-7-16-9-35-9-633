@@ -28,18 +28,18 @@ public class CompanyController {
         return companyService.findEmployeesByName(companyName);
     }
 
-//    @GetMapping(params = {"page", "pageSize"}, value = "/companies")
-//    public List<Company> getCompaniesByPage(@RequestParam int page, @RequestParam int pageSize) {
-//        return companyService.getCompaniesByPage(page,pageSize);
-//    }
+    @GetMapping(params = {"page", "pageSize"}, value = "/companies")
+    public List<Company> getCompaniesByPage(@RequestParam(name="page") Integer page, @RequestParam Integer pageSize) {
+        return companyService.getCompaniesByPage(page,pageSize);
+    }
 
     @PostMapping("/companies")
-    public void addCompany(Company company){
+    public void addCompany(@RequestBody Company company){
         companyService.addCompany(company);
     }
 
     @PutMapping("/companies/{companyName}")
-    public void updateCompany(@PathVariable String companyName,Company company){
+    public void updateCompany(@PathVariable String companyName,@RequestBody Company company){
         companyService.updateCompany(companyName,company);
     }
 

@@ -31,7 +31,7 @@ public class CompanyRepository {
         return companies.get(companyName).getEmployees();
     }
 
-    public List<Company> getCompaniesByPage(int page, int pageSize) {
+    public List<Company> getCompaniesByPage(Integer page, Integer pageSize) {
         int start = (page - 1) * pageSize;
         int end = (page - 1) * pageSize + pageSize;
         return new ArrayList<>(companies.values()).subList(start, end);
@@ -49,8 +49,6 @@ public class CompanyRepository {
     }
 
     public void deleteCompanyByName(String companyName) {
-        if (companies.containsKey(companyName)) {
-            companies.remove(companyName);
-        }
+        companies.remove(companyName);
     }
 }

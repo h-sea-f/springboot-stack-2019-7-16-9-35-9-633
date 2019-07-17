@@ -1,5 +1,6 @@
 package com.tw.apistackbase;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.apistackbase.controller.EmployeesController;
 import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.EmployeeService;
@@ -16,9 +17,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,15 +40,20 @@ public class EmployeesControllerTest {
         employeeList.add(new Employee(3, "Sean2", 22, "male", 5000));
         Mockito.when(employeeService.getAllEmployee()).thenReturn(employeeList);
         ResultActions result = mvc.perform(get("/employees"));
-        result.andExpect(status().isOk()).andExpect(jsonPath("[0].name").value("Sean"));
+        result.andExpect(status().isOk()).andExpect(jsonPath("[0].name").value("Sean")).
+                andExpect(jsonPath("[1].name").value("Sean1")).
+                andExpect(jsonPath("[2].name").value("Sean2"));
     }
 
     @Test
-    void should_return_employee_when_getByName_given_name() throws Exception {
+    void should_return_employee_when_getById_given_id() throws Exception {
         Employee employee = new Employee(1, "Sean", 22, "male", 5000);
-        Mockito.when(employeeService.getByName(anyString())).thenReturn(employee);
-        ResultActions result = mvc.perform(get("/employees/{name}", employee.getName()));
-        result.andExpect(status().isOk()).andExpect(jsonPath("$.name").value("Sean"));
+        Mockito.when(employeeService.getById(anyInt())).thenReturn(employee);
+        ResultActions result = mvc.perform(get("/employees/{id}", employee.getId()));
+        result.andExpect(status().isOk()).andExpect(jsonPath("$.name").value("Sean")).
+                andExpect(jsonPath("$.age").value(22)).
+                andExpect(jsonPath("$.gender").value("male")).
+                andExpect(jsonPath("$.salary").value(5000));
     }
 
     @Test
@@ -58,5 +64,13 @@ public class EmployeesControllerTest {
         Mockito.when(employeeService.getEmployeesByPage(anyInt(), anyInt())).thenReturn((employees));
         ResultActions result = mvc.perform(get("/employees?page=1&pageSize=1"));
         result.andExpect(status().isOk()).andExpect(jsonPath("[0].name").value("Sean"));
+    }
+
+    @Test
+    void should_create_employee() throws Exception {
+        Employee employee = new Employee(4, "Sean3", 33, "male", 600);
+        ResultActions result = mvc.perform(post("/employees").contentType("application/json;charset=UTF-8").
+                content(new ObjectMapper().writeValueAsString(employee)));
+        result.andExpect(status().isCreated());
     }
 }

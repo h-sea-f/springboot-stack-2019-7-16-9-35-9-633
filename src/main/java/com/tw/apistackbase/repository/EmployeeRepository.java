@@ -21,13 +21,10 @@ public class EmployeeRepository {
         return new ArrayList<>(employees.values());
     }
 
-    public Employee getByName(String name) {
-        return employees.get(name);
-    }
-
     public List<Employee> getEmployeesByPage(int page, int pageSize) {
         int start = (page - 1) * pageSize;
-        int end = (page - 1) * pageSize + pageSize;
+        int end = start + pageSize;
+        System.out.println("1111111111111111111111111111111111111111");
         return new ArrayList<>(employees.values()).subList(start, end);
     }
 
@@ -50,5 +47,9 @@ public class EmployeeRepository {
         if(employees.containsKey(String.valueOf(id))){
             employees.remove(String.valueOf(id));
         }
+    }
+
+    public Employee getByid(int id) {
+        return employees.get(String.valueOf(id));
     }
 }

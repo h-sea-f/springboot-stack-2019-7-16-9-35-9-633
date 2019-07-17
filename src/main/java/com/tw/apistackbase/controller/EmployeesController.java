@@ -17,12 +17,12 @@ public class EmployeesController {
         return employeeService.getAllEmployee();
     }
 
-    @GetMapping("/employees/{name}")
-    public Employee getByName(@PathVariable String name) {
-        return employeeService.getByName(name);
+    @GetMapping("/employees/{id}")
+    public Employee getById(@PathVariable int id) {
+        return employeeService.getById(id);
     }
 
-    @GetMapping(params = {"page", "pageSize"}, value = "/companies")
+    @GetMapping(params = {"page", "pageSize"}, value = "/employees")
     public List<Employee> getEmployeesByPage(@RequestParam int page, @RequestParam int pageSize) {
         return employeeService.getEmployeesByPage(page, pageSize);
     }
@@ -33,12 +33,12 @@ public class EmployeesController {
     }
 
     @PostMapping("/employees")
-    public void addEmployee(Employee employee){
+    public void addEmployee(@RequestBody Employee employee){
         employeeService.addEmployee(employee);
     }
 
     @PutMapping("/employees/{id}")
-    public void updateEmployee(@PathVariable int id,Employee employee){
+    public void updateEmployee(@PathVariable int id,@RequestBody Employee employee){
         employeeService.updateEmployee(id,employee);
     }
 
