@@ -1,40 +1,47 @@
 package com.tw.apistackbase.model;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "company")
 public class Company {
-    private String companyName;
-    private int employeesNumber;
-    private List<Employee> employees = new ArrayList<>();
+    @Id
+    @GeneratedValue
+    private int id;
+    private String name;
+    private String address;
 
-    public Company(String companyName, int employeesNumber, List<Employee> employees) {
-        this.companyName = companyName;
-        this.employeesNumber = employeesNumber;
-        this.employees = employees;
+    @OneToMany
+    @JoinColumn(name = "company_id")
+    private List<Employee> employees;
+
+    public int getId() {
+        return id;
     }
 
-    public Company() {
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public int getEmployeesNumber() {
-        return employeesNumber;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public List<Employee> getEmployees() {
         return employees;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setEmployeesNumber(int employeesNumber) {
-        this.employeesNumber = employeesNumber;
     }
 
     public void setEmployees(List<Employee> employees) {
