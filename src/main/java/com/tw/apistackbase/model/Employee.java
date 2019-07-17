@@ -1,17 +1,25 @@
 package com.tw.apistackbase.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
     @Id
-    @GeneratedValue
     private int id;
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private EmployeeRecord employeeRecord;
+
+    public EmployeeRecord getEmployeeRecord() {
+        return employeeRecord;
+    }
+
+    public void setEmployeeRecord(EmployeeRecord employeeRecord) {
+        this.employeeRecord = employeeRecord;
+    }
 
     public int getId() {
         return id;
